@@ -2,8 +2,8 @@ import json
 from datetime import timedelta, datetime
 
 from airflow.models import DAG, Variable
-from airflow.providers.google.cloud.operators.bigquery import BigQueryOperator
-from airflow.providers.google.cloud.operators.bigquery import BigQueryCheckOperator
+from airflow.contrib.operators.bigquery_operator import BigQueryOperator
+from airflow.contrib.operators.bigquery_check_operator import BigQueryCheckOperator
 
 
 # Config variables
