@@ -14,18 +14,26 @@ dag = DAG(dag_id='wassap_dag', default_args=args, schedule_interval=None)
 
 
 def run_this_func1(**context):
-    print ("hello_dag")
+    passed_value = 1
+    context['ti'].xcom_push(key="pass_val", value=passed_value)
+    print ('passed_value', passed_value)
 
-def run_this_func2(**contect):
+def run_this_func2(**context):
     # print ("hello_dag")
     # print (str(5/0))
+    received_value = context['ti'].xcom_pull(key="pass_val")
+    passed_value = received_value + 1
+    context['ti'].xcom_push(key="pass_val", value=passed_value)
     if (random.random() > .7):
         print (str(5/0))
     else:
-        print ("hello_dag2")
+        print ('received_value', received_value)
+        print ('passed_value', passed_value)
+
 
 def run_this_func3(**context):
-    print ("hello_dag3")
+    received_value = context['ti'].xcom_pull(key="pass_val")
+    print ('received_value', received_value)
 
 
 
